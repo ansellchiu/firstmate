@@ -1,0 +1,71 @@
+# Live fm-crew-state.sh reads against real github.com PRs via real gh (no-mistakes ledger stubbed)
+# PR 8203: state=CLOSED mergedAt=null
+# PR 8191: state=MERGED mergedAt=2026-11-05T23:27:30Z
+
+## BASE 8b1618a4
+[base] route=passed               ledger=0 pr=https://github.com/kunchenguid/firstmate/pull/8203
+  -> state: done · source: run-step · run passed: PR closed · pr=https://github.com/kunchenguid/firstmate/pull/8203
+[base] route=passed               ledger=1 pr=https://github.com/kunchenguid/firstmate/pull/8203
+  -> state: done · source: run-step · run passed: PR closed · run: 01RUN · pr=https://github.com/kunchenguid/firstmate/pull/8203
+[base] route=passed-with-override ledger=0 pr=https://github.com/kunchenguid/firstmate/pull/8203
+  -> state: done · source: run-step · run passed: PR closed · pr=https://github.com/kunchenguid/firstmate/pull/8203
+[base] route=passed-with-override ledger=1 pr=https://github.com/kunchenguid/firstmate/pull/8203
+  -> state: done · source: run-step · run passed: PR closed · run: 01RUN · pr=https://github.com/kunchenguid/firstmate/pull/8203
+[base] route=passed-with-skips    ledger=0 pr=https://github.com/kunchenguid/firstmate/pull/8203
+  -> state: done · source: run-step · run passed: PR closed (publication/CI verification skipped) · pr=https://github.com/kunchenguid/firstmate/pull/8203
+[base] route=passed-with-skips    ledger=1 pr=https://github.com/kunchenguid/firstmate/pull/8203
+  -> state: done · source: run-step · run passed: PR closed (publication/CI verification skipped) · run: 01RUN · pr=https://github.com/kunchenguid/firstmate/pull/8203
+[base] route=completed            ledger=0 pr=https://github.com/kunchenguid/firstmate/pull/8203
+  -> state: done · source: run-step · run completed · pr=https://github.com/kunchenguid/firstmate/pull/8203
+[base] route=completed            ledger=1 pr=https://github.com/kunchenguid/firstmate/pull/8203
+  -> state: done · source: run-step · run completed · run: 01RUN · pr=https://github.com/kunchenguid/firstmate/pull/8203
+[base] route=passed               ledger=0 pr=https://github.com/kunchenguid/firstmate/pull/8191
+  -> state: done · source: run-step · run passed: PR merged · pr=https://github.com/kunchenguid/firstmate/pull/8191
+[base] route=passed               ledger=1 pr=https://github.com/kunchenguid/firstmate/pull/8191
+  -> state: done · source: run-step · run passed: PR merged · run: 01RUN · pr=https://github.com/kunchenguid/firstmate/pull/8191
+[base] route=passed-with-override ledger=0 pr=https://github.com/kunchenguid/firstmate/pull/8191
+  -> state: done · source: run-step · run passed: PR merged · pr=https://github.com/kunchenguid/firstmate/pull/8191
+[base] route=passed-with-override ledger=1 pr=https://github.com/kunchenguid/firstmate/pull/8191
+  -> state: done · source: run-step · run passed: PR merged · run: 01RUN · pr=https://github.com/kunchenguid/firstmate/pull/8191
+[base] route=passed-with-skips    ledger=0 pr=https://github.com/kunchenguid/firstmate/pull/8191
+  -> state: done · source: run-step · run passed: PR merged (publication/CI verification skipped) · pr=https://github.com/kunchenguid/firstmate/pull/8191
+[base] route=passed-with-skips    ledger=1 pr=https://github.com/kunchenguid/firstmate/pull/8191
+  -> state: done · source: run-step · run passed: PR merged (publication/CI verification skipped) · run: 01RUN · pr=https://github.com/kunchenguid/firstmate/pull/8191
+[base] route=completed            ledger=0 pr=https://github.com/kunchenguid/firstmate/pull/8191
+  -> state: done · source: run-step · run completed · pr=https://github.com/kunchenguid/firstmate/pull/8191
+[base] route=completed            ledger=1 pr=https://github.com/kunchenguid/firstmate/pull/8191
+  -> state: done · source: run-step · run completed · run: 01RUN · pr=https://github.com/kunchenguid/firstmate/pull/8191
+
+## TARGET 0c1488ed
+[target] route=passed               ledger=0 pr=https://github.com/kunchenguid/firstmate/pull/8203
+  -> state: failed · source: run-step · PR closed unmerged · pr=https://github.com/kunchenguid/firstmate/pull/8203
+[target] route=passed               ledger=1 pr=https://github.com/kunchenguid/firstmate/pull/8203
+  -> state: failed · source: run-step · PR closed unmerged · run: 01RUN · pr=https://github.com/kunchenguid/firstmate/pull/8203
+[target] route=passed-with-override ledger=0 pr=https://github.com/kunchenguid/firstmate/pull/8203
+  -> state: failed · source: run-step · PR closed unmerged · pr=https://github.com/kunchenguid/firstmate/pull/8203
+[target] route=passed-with-override ledger=1 pr=https://github.com/kunchenguid/firstmate/pull/8203
+  -> state: failed · source: run-step · PR closed unmerged · run: 01RUN · pr=https://github.com/kunchenguid/firstmate/pull/8203
+[target] route=passed-with-skips    ledger=0 pr=https://github.com/kunchenguid/firstmate/pull/8203
+  -> state: failed · source: run-step · PR closed unmerged (publication/CI verification skipped) · pr=https://github.com/kunchenguid/firstmate/pull/8203
+[target] route=passed-with-skips    ledger=1 pr=https://github.com/kunchenguid/firstmate/pull/8203
+  -> state: failed · source: run-step · PR closed unmerged (publication/CI verification skipped) · run: 01RUN · pr=https://github.com/kunchenguid/firstmate/pull/8203
+[target] route=completed            ledger=0 pr=https://github.com/kunchenguid/firstmate/pull/8203
+  -> state: failed · source: run-step · PR closed unmerged · pr=https://github.com/kunchenguid/firstmate/pull/8203
+[target] route=completed            ledger=1 pr=https://github.com/kunchenguid/firstmate/pull/8203
+  -> state: failed · source: run-step · PR closed unmerged · run: 01RUN · pr=https://github.com/kunchenguid/firstmate/pull/8203
+[target] route=passed               ledger=0 pr=https://github.com/kunchenguid/firstmate/pull/8191
+  -> state: done · source: run-step · run passed: PR merged · pr=https://github.com/kunchenguid/firstmate/pull/8191
+[target] route=passed               ledger=1 pr=https://github.com/kunchenguid/firstmate/pull/8191
+  -> state: done · source: run-step · run passed: PR merged · run: 01RUN · pr=https://github.com/kunchenguid/firstmate/pull/8191
+[target] route=passed-with-override ledger=0 pr=https://github.com/kunchenguid/firstmate/pull/8191
+  -> state: done · source: run-step · run passed: PR merged · pr=https://github.com/kunchenguid/firstmate/pull/8191
+[target] route=passed-with-override ledger=1 pr=https://github.com/kunchenguid/firstmate/pull/8191
+  -> state: done · source: run-step · run passed: PR merged · run: 01RUN · pr=https://github.com/kunchenguid/firstmate/pull/8191
+[target] route=passed-with-skips    ledger=0 pr=https://github.com/kunchenguid/firstmate/pull/8191
+  -> state: done · source: run-step · run passed: PR merged (publication/CI verification skipped) · pr=https://github.com/kunchenguid/firstmate/pull/8191
+[target] route=passed-with-skips    ledger=1 pr=https://github.com/kunchenguid/firstmate/pull/8191
+  -> state: done · source: run-step · run passed: PR merged (publication/CI verification skipped) · run: 01RUN · pr=https://github.com/kunchenguid/firstmate/pull/8191
+[target] route=completed            ledger=0 pr=https://github.com/kunchenguid/firstmate/pull/8191
+  -> state: done · source: run-step · run passed: PR merged · pr=https://github.com/kunchenguid/firstmate/pull/8191
+[target] route=completed            ledger=1 pr=https://github.com/kunchenguid/firstmate/pull/8191
+  -> state: done · source: run-step · run passed: PR merged · run: 01RUN · pr=https://github.com/kunchenguid/firstmate/pull/8191

@@ -1,0 +1,8 @@
+# Edge cases (target 0c1488ed), real gh
+# PR 8210: OPEN
+env https://github.com/kunchenguid/firstmate/pull/8210
+  -> state: done · source: run-step · run passed: PR open · pr=https://github.com/kunchenguid/firstmate/pull/8210
+env https://github.com/kunchenguid/firstmate/pull/999999
+  -> state: done · source: run-step · run passed: PR state unknown (unreadable) · pr=https://github.com/kunchenguid/firstmate/pull/999999
+env FM_CREW_STATE_NO_FORGE=1 https://github.com/kunchenguid/firstmate/pull/8203
+  -> state: done · source: run-step · run passed: PR state unknown (forge read skipped) · pr=https://github.com/kunchenguid/firstmate/pull/8203
