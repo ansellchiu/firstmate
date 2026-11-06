@@ -1,0 +1,82 @@
+# Live CLI transcript: bin/fm-claude-trust.sh <pool-worktree> <secondmate-clone>
+# git version 2.54.0 (Apple Git-157); node v26.3.0; $T is a disposable mktemp dir
+pool worktree common dir:     $T/fleet/projects/project/.git
+secondmate clone common dir:  $T/secondmate-home/projects/project/.git
+primary origin: $T/origin/project.git
+mate origin:    $T/origin/project.git
+
+== S1 BASE 8b1618a4 (before fix): secondmate clone -> shared pool worktree
+$ CLAUDE_CONFIG_DIR=$T/cfg-base fm-claude-trust.sh $T/treehouse/project-abc/1/project $T/secondmate-home/projects/project
+error: refusing to pre-register Claude trust: '$T/treehouse/project-abc/1/project' is not a worktree of project '$T/secondmate-home/projects/project'
+exit=1
+store: (none written)
+
+== S1 TARGET e2a6e7d4: same layout
+$ CLAUDE_CONFIG_DIR=$T/cfg-s1 fm-claude-trust.sh $T/treehouse/project-abc/1/project $T/secondmate-home/projects/project
+trusted: $T/treehouse/project-abc/1/project
+trusted (project root): $T/fleet/projects/project
+exit=0
+store:
+  $T/treehouse/project-abc/1/project {"hasTrustDialogAccepted":true}
+  $T/fleet/projects/project {"hasTrustDialogAccepted":true}
+
+== S2 TARGET: standing import consent on the pool's owning primary checkout is carried to the pool worktree; mate clone gets no entry
+$ CLAUDE_CONFIG_DIR=$T/cfg-s2 fm-claude-trust.sh $T/treehouse/project-abc/1/project $T/secondmate-home/projects/project
+trusted: $T/treehouse/project-abc/1/project
+trusted (project root): $T/fleet/projects/project
+exit=0
+store:
+  $T/fleet/projects/project {"hasTrustDialogAccepted":true,"hasClaudeMdExternalIncludesApproved":true,"hasClaudeMdExternalIncludesWarningShown":true}
+  $T/treehouse/project-abc/1/project {"hasTrustDialogAccepted":true,"hasClaudeMdExternalIncludesApproved":true,"hasClaudeMdExternalIncludesWarningShown":true}
+
+== S2b TARGET: an explicit decline on the owning primary checkout still refuses and is not flipped
+$ CLAUDE_CONFIG_DIR=$T/cfg-s2b fm-claude-trust.sh $T/treehouse/project-abc/1/project $T/secondmate-home/projects/project
+error: project entry for $T/fleet/projects/project in $T/cfg-s2b/.claude.json already declined external CLAUDE.md imports; refusing to override that consent. To recover, remove hasClaudeMdExternalIncludesApproved and hasClaudeMdExternalIncludesWarningShown from that project entry and approve the imports dialog interactively once
+error: refusing to pre-register Claude trust: could not record trust for '$T/treehouse/project-abc/1/project' and project '$T/fleet/projects/project' in '$T/cfg-s2b/.claude.json'
+exit=1
+store:
+  $T/fleet/projects/project {"hasClaudeMdExternalIncludesApproved":false,"hasClaudeMdExternalIncludesWarningShown":true}
+
+== S3 TARGET: a clone of a DIFFERENT origin is refused
+$ CLAUDE_CONFIG_DIR=$T/cfg-s3 fm-claude-trust.sh $T/treehouse/project-abc/1/project $T/evil-home/projects/project
+error: refusing to pre-register Claude trust: '$T/treehouse/project-abc/1/project' is not a worktree of project '$T/evil-home/projects/project'
+exit=1
+store: (none written)
+
+(link clone origin: $T/origin-link/project.git)
+
+== S4 TARGET: same origin spelled through a symlinked absolute path resolves to the same directory
+$ CLAUDE_CONFIG_DIR=$T/cfg-s4 fm-claude-trust.sh $T/treehouse/project-abc/1/project $T/link-home/projects/project
+trusted: $T/treehouse/project-abc/1/project
+trusted (project root): $T/fleet/projects/project
+exit=0
+store:
+  $T/treehouse/project-abc/1/project {"hasTrustDialogAccepted":true}
+  $T/fleet/projects/project {"hasTrustDialogAccepted":true}
+
+== S5 TARGET: textually identical RELATIVE origins prove nothing (fail closed)
+$ CLAUDE_CONFIG_DIR=$T/cfg-s5 fm-claude-trust.sh $T/treehouse/project-abc/1/project $T/secondmate-home/projects/project
+error: refusing to pre-register Claude trust: '$T/treehouse/project-abc/1/project' is not a worktree of project '$T/secondmate-home/projects/project'
+exit=1
+store: (none written)
+
+== S6 TARGET: a mate clone with no origin is refused
+$ CLAUDE_CONFIG_DIR=$T/cfg-s6 fm-claude-trust.sh $T/treehouse/project-abc/1/project $T/secondmate-home/projects/project
+error: refusing to pre-register Claude trust: '$T/treehouse/project-abc/1/project' is not a worktree of project '$T/secondmate-home/projects/project'
+exit=1
+store: (none written)
+
+== S7 TARGET: the primary checkout itself (not a linked worktree) is still refused
+$ CLAUDE_CONFIG_DIR=$T/cfg-s7 fm-claude-trust.sh $T/fleet/projects/project $T/fleet/projects/project
+error: refusing to pre-register Claude trust: '$T/fleet/projects/project' is a primary checkout, not an isolated worktree
+exit=1
+store: (none written)
+
+== S8 TARGET: same-repo worktree path (pool + its own primary) still trusted as before
+$ CLAUDE_CONFIG_DIR=$T/cfg-s8 fm-claude-trust.sh $T/treehouse/project-abc/1/project $T/fleet/projects/project
+trusted: $T/treehouse/project-abc/1/project
+trusted (project root): $T/fleet/projects/project
+exit=0
+store:
+  $T/treehouse/project-abc/1/project {"hasTrustDialogAccepted":true}
+  $T/fleet/projects/project {"hasTrustDialogAccepted":true}
