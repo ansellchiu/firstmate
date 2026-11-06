@@ -1,0 +1,6 @@
+$ fm-tool-update-check.sh check   # alpha behind, beta current
+tool updates: alpha update available: local main is 1 commit behind origin/main
+$ fm-tool-update-check.sh check   # beta now also behind (alpha unchanged) -> must report
+tool updates: alpha update available: local main is 1 commit behind origin/main; beta update available: local main is 1 commit behind origin/main
+$ fm-tool-update-check.sh check   # repeat poll -> silent
+<silent>

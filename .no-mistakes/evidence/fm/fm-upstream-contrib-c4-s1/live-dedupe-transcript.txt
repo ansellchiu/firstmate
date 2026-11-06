@@ -1,0 +1,36 @@
+===== base =====
+$ fm-tool-update-check.sh check   # poll 1: clone 2 behind
+tool updates: firstmate update available: local main is 2 commits behind origin/main
+$ fm-tool-update-check.sh check   # poll 2: nothing changed
+<silent>
+
+$ fm-tool-update-check.sh check   # poll 3: upstream tip moved (unfetched)
+tool updates: firstmate update available: origin/main is at eb4d6b824592 which this copy does not have
+
+$ fm-tool-update-check.sh check   # poll 4: upstream tip moved again
+tool updates: firstmate update available: origin/main is at 21834a9f6045 which this copy does not have
+$ fm-tool-update-check.sh check   # poll 5: after fetch (behind count known)
+tool updates: firstmate update available: local main is 4 commits behind origin/main
+$ fm-tool-update-check.sh check   # poll 6: clone caught up
+<silent>
+$ fm-tool-update-check.sh check   # poll 7: behind again (new condition)
+tool updates: firstmate update available: local main is 1 commit behind origin/main
+record: fm-tool-updates-v1 epoch=1793935474 reported=firstmate update available: local main is 1 commit behind origin/main 
+===== fixed =====
+$ fm-tool-update-check.sh check   # poll 1: clone 2 behind
+tool updates: firstmate update available: local main is 2 commits behind origin/main
+$ fm-tool-update-check.sh check   # poll 2: nothing changed
+<silent>
+
+$ fm-tool-update-check.sh check   # poll 3: upstream tip moved (unfetched)
+<silent>
+
+$ fm-tool-update-check.sh check   # poll 4: upstream tip moved again
+<silent>
+$ fm-tool-update-check.sh check   # poll 5: after fetch (behind count known)
+<silent>
+$ fm-tool-update-check.sh check   # poll 6: clone caught up
+<silent>
+$ fm-tool-update-check.sh check   # poll 7: behind again (new condition)
+tool updates: firstmate update available: local main is 1 commit behind origin/main
+record: fm-tool-updates-v1 epoch=1793935477 reported=firstmate update available: local main is behind origin/main 
