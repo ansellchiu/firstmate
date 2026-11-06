@@ -1,0 +1,31 @@
+== Real Claude desktop process ==
+ 5386 /Applications/Cl /Applications/Claude.app/Contents/MacOS/Claude
+-- base: fm_harness_pid_alive 5386 / process_matches
+NOT-matched
+alive=no
+-- fix: fm_harness_pid_alive 5386 / process_matches
+matches IS_CLAUDE=1
+alive=yes
+
+== Real process tree: shell running under a process whose argv0/comm is 'Claude' ==
+-- base
+58459 Claude
+ancestry_pid=10267 comm=claude
+-- fix
+58130 Claude
+ancestry_pid=10267 comm=claude
+== Detached real process tree (launchd -> 'Claude' -> bash running session-lock lib) ==
+-- base (lib from 8b1618a4)
+parent pid=74371 comm=Claude ppid=1
+ancestry=NOT-FOUND (refused)
+lock_owned_by_self=no
+-- fix (lib from 74a52c22)
+parent pid=74389 comm=Claude ppid=1
+ancestry_pid=74389 (matches parent: yes)
+lock_owned_by_self=yes
+
+== Adversarial (fix lib): detached non-harness capitalized names ==
+Claudette: ancestry_pid=91418
+Pip: ancestry=NOT-FOUND (refused)
+Pipeline: ancestry=NOT-FOUND (refused)
+ZSH: ancestry=NOT-FOUND (refused)
